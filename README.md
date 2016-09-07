@@ -1,6 +1,10 @@
-# motordriver
+# motordriver repository
 
 This site is used for the purpose of developing and testing motor driver files by HUMMING WORKS LLC.
+
+# MotorDriver.py
+
+Hook up the motor driver shield on top of the Raspberry Pi and turn it on. Download this file on the desktop and run it.
 
 # license
 
