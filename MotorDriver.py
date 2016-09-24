@@ -3,73 +3,73 @@
 
 import RPi.GPIO as GPIO, Tkinter
 
-L1 = 36
-L2 = 35
-R1 = 33
-R2 = 32
+leftForward = 36
+leftReverse = 35
+rightForward = 33
+rightReverse = 32
 
 def init():
-    global p, q, a, b
+    global LF, LR, RF, RR
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BOARD)
 
-    GPIO.setup(L1, GPIO.OUT)
-    p = GPIO.PWM(L1, 20)
-    p.start(0)
+    GPIO.setup(leftForward, GPIO.OUT)
+    LF = GPIO.PWM(leftForward, 20)
+    LF.start(0)
 
-    GPIO.setup(L2, GPIO.OUT)
-    q = GPIO.PWM(L2, 20)
-    q.start(0)
+    GPIO.setup(leftReverse, GPIO.OUT)
+    LR = GPIO.PWM(leftReverse, 20)
+    LR.start(0)
 
-    GPIO.setup(R1, GPIO.OUT)
-    a = GPIO.PWM(R1, 20)
-    a.start(0)
+    GPIO.setup(rightForward, GPIO.OUT)
+    RF = GPIO.PWM(rightForward, 20)
+    RF.start(0)
 
-    GPIO.setup(R2, GPIO.OUT)
-    b = GPIO.PWM(R2, 20)
-    b.start(0)
+    GPIO.setup(rightReverse, GPIO.OUT)
+    RR = GPIO.PWM(rightReverse, 20)
+    RR.start(0)
 
 def cleanup():
     stop()
     GPIO.cleanup()
 
 def stop():
-    p.ChangeDutyCycle(0)
-    q.ChangeDutyCycle(0)
-    a.ChangeDutyCycle(0)
-    b.ChangeDutyCycle(0)
+    LF.ChangeDutyCycle(0)
+    LR.ChangeDutyCycle(0)
+    RF.ChangeDutyCycle(0)
+    RR.ChangeDutyCycle(0)
 
 def forward(speed):
-    p.ChangeDutyCycle(speed)
-    q.ChangeDutyCycle(0)
-    a.ChangeDutyCycle(speed)
-    b.ChangeDutyCycle(0)
-    p.ChangeFrequency(speed + 5)
-    a.ChangeFrequency(speed + 5)
+    LF.ChangeDutyCycle(speed)
+    LR.ChangeDutyCycle(0)
+    RF.ChangeDutyCycle(speed)
+    RR.ChangeDutyCycle(0)
+    LF.ChangeFrequency(speed + 5)
+    RF.ChangeFrequency(speed + 5)
 
 def reverse(speed):
-    p.ChangeDutyCycle(0)
-    q.ChangeDutyCycle(speed)
-    a.ChangeDutyCycle(0)
-    b.ChangeDutyCycle(speed)
-    q.ChangeFrequency(speed + 5)
-    b.ChangeFrequency(speed + 5)
+    LF.ChangeDutyCycle(0)
+    LR.ChangeDutyCycle(speed)
+    RF.ChangeDutyCycle(0)
+    RR.ChangeDutyCycle(speed)
+    LR.ChangeFrequency(speed + 5)
+    RR.ChangeFrequency(speed + 5)
 
 def spinLeft(speed):
-    p.ChangeDutyCycle(0)
-    q.ChangeDutyCycle(speed)
-    a.ChangeDutyCycle(speed)
-    b.ChangeDutyCycle(0)
-    q.ChangeFrequency(speed + 5)
-    a.ChangeFrequency(speed + 5)
+    LF.ChangeDutyCycle(0)
+    LR.ChangeDutyCycle(speed)
+    RF.ChangeDutyCycle(speed)
+    RR.ChangeDutyCycle(0)
+    LR.ChangeFrequency(speed + 5)
+    RF.ChangeFrequency(speed + 5)
 
 def spinRight(speed):
-    p.ChangeDutyCycle(speed)
-    q.ChangeDutyCycle(0)
-    a.ChangeDutyCycle(0)
-    b.ChangeDutyCycle(speed)
-    p.ChangeFrequency(speed + 5)
-    b.ChangeFrequency(speed + 5)
+    LF.ChangeDutyCycle(speed)
+    LR.ChangeDutyCycle(0)
+    RF.ChangeDutyCycle(0)
+    RR.ChangeDutyCycle(speed)
+    LF.ChangeFrequency(speed + 5)
+    RR.ChangeFrequency(speed + 5)
 
 root = Tkinter.Tk()
 
