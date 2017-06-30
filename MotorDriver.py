@@ -116,3 +116,6 @@ spdSlider = Tkinter.Scale(root, label = 'Speed', orient = 'h', from_ = 0, to = 1
 spdSlider.pack()
 
 root.mainloop()
+
+cleanup()
+
